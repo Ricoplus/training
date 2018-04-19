@@ -15,21 +15,32 @@ struct TreeNode{
 };
 
 class Solution {
-	bool isSubtree(TreeNode* pRootA, TreeNode* pRootB) {
-		if (pRootB == NULL) return true;
-		if (pRootA == NULL) return false;
-		if (pRootB->val == pRootA->val) {
-			return isSubtree(pRootA->left, pRootB->left)
-				&& isSubtree(pRootA->right, pRootB->right);
-		}
-		else return false;
-	}
 public:
-	bool HasSubtree(TreeNode* pRootA, TreeNode* pRootB)
+	bool IsSub(TreeNode* pRoot1, TreeNode* pRoot2)
 	{
-		if (pRootA == NULL || pRootB == NULL) return false;
-		return isSubtree(pRootA, pRootB) ||
-			HasSubtree(pRootA->left, pRootB) ||
-			HasSubtree(pRootA->right, pRootB);
+		if (pRoot2 == NULL)//注意这里是pRoot2==NULL结束 ，因为主树有可能下面还有节点
+			return true;
+		if (pRoot1 == NULL)//如果是子树,则必然上面就会返回true值  
+			return false;
+		//注意这里是判断值
+		if (pRoot1->val == pRoot2->val)
+		{
+			return IsSub(pRoot1->left, pRoot2->left)
+				&& IsSub(pRoot1->right, pRoot2->right);
+		}
+		else
+			return false;
+	}
+	bool HasSubtree(TreeNode* pRoot1, TreeNode* pRoot2)
+	{
+		if (pRoot1 == NULL || pRoot2 == NULL)
+			return false;
+
+		//注意这里利用短路特性 不要等于 在return
+		//会导致本来有 但是提前返回 导致相反结果
+		//直接就去写
+		return IsSub(pRoot1, pRoot2)||
+			HasSubtree(pRoot1->left, pRoot2)||
+			HasSubtree(pRoot1->right, pRoot2);
 	}
 };
