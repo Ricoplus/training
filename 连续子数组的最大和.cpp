@@ -18,6 +18,7 @@ public:
 			return 0;
 
 		int max = array[0], total = array[0];
+		//´Ó1¿ªÊ¼
 		for (size_t i = 1; i < array.size(); i++)
 		{
 			if (total > 0)
