@@ -11,6 +11,12 @@ using namespace std;
 //对于 % 50的数据, size <= 10 ^ 4
 //对于 % 75的数据, size <= 10 ^ 5
 //对于 % 100的数据, size <= 2 * 10 ^ 5
+
+
+//陷阱1 begin1<=end1 begin2<=end2
+//陷阱2	count 是long long 类型
+//陷阱3 MegSort()函数中vectoe<int>  必须是引用
+//陷阱4 index=begin
 class Solution{
 public:
 	int InversePairs(vector<int> v) {
