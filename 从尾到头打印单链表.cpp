@@ -1,6 +1,6 @@
 
 
-//ÊäÈëÒ»¸öÁ´±í£¬´ÓÎ²µ½Í·´òÓ¡Á´±íÃ¿¸ö½ÚµãµÄÖµ¡£
+//è¾“å…¥ä¸€ä¸ªé“¾è¡¨ï¼Œä»å°¾åˆ°å¤´æ‰“å°é“¾è¡¨æ¯ä¸ªèŠ‚ç‚¹çš„å€¼ã€‚
 #include<vector>
 struct ListNode {
 	int val;
@@ -13,24 +13,29 @@ struct ListNode {
 
 class Solution {
 public:
+	//1.é€’å½’
+	/*void Print(vector<int>& v, ListNode* cur)
+	{
+		if (cur == NULL)
+			return;
+		Print(v,cur->next);
+		v.push_back(cur->val);
+	}
 	vector<int> printListFromTailToHead(ListNode* head) {
-		ListNode* prev = NULL;
-		ListNode* next = head;
+		vector<int> v;
+		Print(v, head);
+		return v;
+	}*/
+	//2.åˆ©ç”¨åå‘è¿­ä»£å™¨
+	vector<int> printListFromTailToHead(ListNode* head) {
+		vector<int> v;
 		while (head)
 		{
-			next = head->next
-			head->next = prev;
-			prev = head;
-			head = next;
+			v.push_back(head->val);
+			head = head->next;
 		}
-		vector<int> v;
-		while (prev)
-		{
-			v.push_back(prev->val);
-			prev = prev->next;
-		}
+		vector<int> tmp(v.rbegin(),v.rend());
 		return v;
-
-
 	}
+
 };
