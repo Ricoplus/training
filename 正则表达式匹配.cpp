@@ -21,7 +21,7 @@ public:
 		}
 		else
 		{
-			if (*str == *pattern || (*str != '\0'&&*pattern == '.'))
+			if (*str == *pattern || (*str != '\0'&&*pattern == '.'))//str后面可能和本次相同或者不同
 				return match(str, pattern + 2) || match(str + 1, pattern);
 			else
 				return match(str,pattern+2);
