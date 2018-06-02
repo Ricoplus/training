@@ -18,47 +18,44 @@ struct RandomListNode{
 	{}
 };
 
-class Solution {
-public:
+
 	/*
 	1、复制每个节点，如：复制节点A得到A1，将A1插入节点A后面
 	2、遍历链表，A1->random = A->random->next;
 	3、将链表拆分成原链表和复制后的链表
 	*/
-
-	RandomListNode* Clone(RandomListNode* pHead)
+class Solution {
+public:
+	RandomListNode * Clone(RandomListNode* pHead)
 	{
-		//刚开始还没有random 所以需要分三步
-		if (!pHead) return NULL;
-		RandomListNode *currNode = pHead;
-		while (currNode) {
-			RandomListNode *node = new RandomListNode(currNode->label);
-			node->next = currNode->next;
-			currNode->next = node;
-			currNode = node->next;
+		if (pHead == NULL)
+			return NULL;
+		RandomListNode* cur = pHead;
+		while (cur)
+		{
+			RandomListNode* tmp = new RandomListNode(cur->label);
+			tmp->next = cur->next;
+			cur->next = tmp;
+			cur = tmp->next;
 		}
-		currNode = pHead;
-		while (currNode) {
-			RandomListNode *node = currNode->next;//注意新复制链表其实是2，4，6，8
-			if (currNode->random) {
-				node->random = currNode->random->next;
-			}
-			currNode = node->next;
+		cur = pHead;
+		while(cur)
+		{
+			RandomListNode* next = cur->next;
+			if(cur->random)
+				next->random = cur->random->next;
+			cur = next->next;
 		}
-		//拆分
-		RandomListNode *pCloneHead = pHead->next;
-		RandomListNode *tmp;
-		currNode = pHead;
-		//2 4
-	
-		while (currNode->next){
-			tmp = currNode->next;//2节点记下
-			currNode->next = tmp->next;//1和3连接起来
-			currNode = tmp;//2   
-			//3 节点记下来
-			//2和4连接起来
-			//3
+		cur = pHead;
+		RandomListNode* head = cur->next;
+		RandomListNode* tmp = cur->next;
+		//1 2 3 4
+		while (tmp)
+		{
+			cur->next = tmp->next;
+			cur = tmp;
+			tmp = tmp->next;
 		}
-		return pCloneHead;
+		return head;
 	}
 };
