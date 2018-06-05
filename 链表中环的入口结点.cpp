@@ -14,32 +14,30 @@ struct ListNode{
 
 class Solution {
 public:
-    ListNode* Meet(ListNode* pHead,ListNode* cur)
-    {
-        while(pHead!=cur)
-        {
-            pHead=pHead->next;
-            cur=cur->next;
-        }
-        return cur ;
-    }
-    ListNode* EntryNodeOfLoop(ListNode* pHead)
-    {
-        if(pHead==NULL||pHead->next==NULL)
-            return NULL;
-
-        ListNode* slow=pHead->next;//注意这里也需要走一步
-        ListNode* fast=pHead->next->next;
-        while(fast&&fast->next&&fast!=slow)
-        {
-            slow=slow->next;
-            fast=fast->next->next;
-        }
-        if(fast==slow)
-        {
-            return Meet(pHead,fast);
-        }
-        else
-            return NULL;
-    }
+	ListNode * EntryNodeOfLoop(ListNode* pHead)
+	{
+		if (pHead == NULL||pHead->next==NULL)
+			return NULL;
+		ListNode* slow = pHead;
+		ListNode* fast = pHead;
+		while (fast&&fast->next)
+		{
+			fast = fast->next->next;
+			slow = slow->next;
+			if (fast == slow)
+				break;
+			
+		}
+		if (fast == slow)
+		{
+			
+			while (pHead != fast)
+			{
+				pHead = pHead->next;
+				fast = fast->next;
+			}
+			return fast;
+		}
+		return NULL;
+	}
 };
