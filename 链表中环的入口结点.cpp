@@ -16,6 +16,7 @@ class Solution {
 public:
 	ListNode * EntryNodeOfLoop(ListNode* pHead)
 	{
+		//注意这里一定还要判断下一个是否为空
 		if (pHead == NULL||pHead->next==NULL)
 			return NULL;
 		ListNode* slow = pHead;

@@ -20,9 +20,9 @@ public:
 			return pHead;
 		else
 		{
-			//防止头结点被删除
 			ListNode* newhead = new ListNode(-1);
-			newhead->next = pHead;//这里需要注意下 这个是不删除头结点
+			//这里一定要注意设置头结点,防止第一个就是重复的,但是还要注意的是刚开始要让newhead->next=pHead
+			newhead->next = pHead;
 			ListNode* prev = newhead;
 			ListNode* cur = pHead;
             //多了个cur->next是因为函数内部要用cur->next
@@ -36,6 +36,7 @@ public:
 					//相当于删除节点
 					prev->next = next;
 					cur = next;
+					//防止cur也是重复的
 				}
 				else
 				{
