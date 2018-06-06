@@ -13,6 +13,7 @@ public:
         for (size_t i = 0; i < length; i++)
         {
             int index = numbers[i];
+            //注意这里是大于等于
             if (index >= length)
                 index -= length;
             if (numbers[index] > length)
